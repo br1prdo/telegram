@@ -49,7 +49,7 @@ if not client.is_user_authorized():
     os.system('clear')
     banner()
     client.sign_in(phone, input(gr+'[+] Enter the sent code: '+re))
- 
+
 os.system('clear')
 banner()
 input_file = sys.argv[1]
@@ -64,12 +64,12 @@ with open(input_file, encoding='UTF-8') as f:
         user['access_hash'] = int(row[2])
         user['name'] = row[3]
         users.append(user)
- 
+
 chats = []
 last_date = None
 chunk_size = 200
 groups=[]
- 
+
 result = client(GetDialogsRequest(
              offset_date=last_date,
              offset_id=0,
@@ -78,29 +78,29 @@ result = client(GetDialogsRequest(
              hash = 0
          ))
 chats.extend(result.chats)
- 
+
 for chat in chats:
     try:
         if chat.megagroup== True:
             groups.append(chat)
     except:
         continue
- 
+
 print(gr+'[+] Choose a group to add members: '+re)
 i=0
 for group in groups:
     print(str(i) + '- ' + group.title)
     i+=1
- 
+
 g_index = input(gr+"Enter a Number: "+re)
 target_group=groups[int(g_index)]
- 
+
 target_group_entity = InputPeerChannel(target_group.id,target_group.access_hash)
- 
+
 print(gr+"[1] Add member by user ID\n[2] Add member by username ")
-mode = int(input(gr+"Input: "+re)) 
+mode = int(input(gr+"Input: "+re))
 n = 0
- 
+
 for user in users:
     n += 1
     if n % 50 == 0:
@@ -117,7 +117,7 @@ for user in users:
 	            sys.exit(re+"[!] Invalid Mode Selected. Please Try Again.")
 	        client(InviteToChannelRequest(target_group_entity,[user_to_add]))
 	        print(gr+"[+] Waiting for 60-180 sec ...")
-	        time.sleep(random.randrange(60, 180))
+	        time.sleep(random.randrange(120, 180))
 	    except PeerFloodError:
 	        print(re+"[!] Getting Flood Errors from Telegram. \n[!] Script is stopping for now. \n[!] Please try again after some time.")
 	    except UserPrivacyRestrictedError:
