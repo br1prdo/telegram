@@ -90,7 +90,7 @@ n = 0
 
 for user in users:
     n += 1
-    if n % 50 == 0:
+    if n % 80 == 0:
         time.sleep(900)
     try:
         print("Adding {}".format(user['id']))
@@ -103,16 +103,16 @@ for user in users:
         else:
             sys.exit("Invalid Mode Selected. Please Try Again.")
         client(InviteToChannelRequest(target_group_entity, [user_to_add]))
-        print("Waiting for 60-180 Seconds ...")
-        time.sleep(random.randrange(60, 120))
+        print("Waiting for 300-600 Seconds ...")
+        time.sleep(random.randrange(300, 600))
     except PeerFloodError:
         print("Getting Flood Error from telegram. Script is stopping now. Please try again after some time.")
         print("Waiting {} seconds".format(SLEEP_TIME_2))
         time.sleep(SLEEP_TIME_2)
     except UserPrivacyRestrictedError:
         print("The user's privacy settings do not allow you to do this. Skipping ...")
-        print("Waiting for 5 Seconds ...")
-        time.sleep(random.randrange(60, 120))
+        print("Waiting for 300 Seconds ...")
+        time.sleep(random.randrange(300, 600))
     except:
         traceback.print_exc()
         print("Unexpected Error! ")
