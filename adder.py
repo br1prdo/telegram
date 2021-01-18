@@ -31,7 +31,7 @@ async def main():
     await client.send_message('me', 'Hello !!!!!')
 
 
-SLEEP_TIME_1 = 200
+SLEEP_TIME_1 = 120
 SLEEP_TIME_2 = 200
 with client:
     client.loop.run_until_complete(main())
@@ -90,8 +90,8 @@ n = 0
 
 for user in users:
     n += 1
-    if n % 80 == 0:
-        time.sleep(120)
+    if n % 100 == 0:
+        time.sleep(180)
     try:
         print("Adding {}".format(user['id']))
         if mode == 1:
@@ -112,7 +112,7 @@ for user in users:
     except UserPrivacyRestrictedError:
         print("The user's privacy settings do not allow you to do this. Skipping ...")
         print("Waiting for 5 Seconds ...")
-        time.sleep(random.randrange(0, 5))
+        time.sleep(random.randrange(0, 30))
     except:
         traceback.print_exc()
         print("Unexpected Error! ")
